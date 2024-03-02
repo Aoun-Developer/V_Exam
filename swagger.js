@@ -9,7 +9,7 @@ const app = express();
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'Quiz Application',
+    title: 'Virtual Examination Portal',
     version: '1.0.0',
     description: 'API documentation for your Node.js application',
   },
@@ -38,8 +38,8 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 // Save the Swagger definition to a YAML file
-//const swaggerYamlFile = 'swagger.yaml';
-//fs.writeFileSync(swaggerYamlFile, YAML.stringify(swaggerSpec));
+const swaggerYamlFile = 'swagger.yaml';
+fs.writeFileSync(swaggerYamlFile, YAML.stringify(swaggerSpec));
 
 const swg = (app) => {
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
