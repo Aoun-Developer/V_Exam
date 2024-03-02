@@ -16,25 +16,16 @@ import roleMiddleware from "../middlewares/roleMiddleware.js";
 
 /**
  *  @swagger
- * /api/v1/questions/:roomId:
- *   post:
+ * /api/v1/question/{roomId}:
+ *   get:
  *     summary: Get Questions
  *     tags: [Questions]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *                 format: email
- *                 description: User's email address
- *               password:
- *                 type: string
- *                 format: password
- *                 description: User's password (at least 6 characters)
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         schema:
+ *           type: text
+ *         description: ID of the room where the question is created
  *     responses:
  *       200:
  *         description: Successful login
@@ -54,7 +45,7 @@ import roleMiddleware from "../middlewares/roleMiddleware.js";
 
 
 // ---------------------------------------------------------------------------------------
-router.get("/:room_id", questionController.getQuestionsForRoom);
+router.get("/:room_id",roleMiddleware, questionController.getQuestionsForRoom);
 
 /**
  * @route POST /api/v1/questions
@@ -63,45 +54,52 @@ router.get("/:room_id", questionController.getQuestionsForRoom);
  */
 
 
-
 /**
  *  @swagger
- * /api/v1/question/:roomId:
+ * /api/v1/question/{roomId}:
  *   post:
  *     summary: Create Question
  *     tags: [Questions]
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         schema:
+ *           type: text
+ *         description: ID of the room where the question is created
  *     requestBody:
- *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
  *             properties:
- *               email:
+ *               text:
  *                 type: string
- *                 format: email
- *                 description: User's email address
- *               password:
+ *                 description: The text of the question
+ *               type:
  *                 type: string
- *                 format: password
- *                 description: User's password (at least 6 characters)
+ *                 description: The type of question
+ *               correctanswer:
+ *                 type: string
+ *                 description: The correct answer to the question
+ *               options:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: Array of options for the question
  *     responses:
  *       200:
- *         description: Successful login
+ *         description: Successful question creation
  *         content:
  *           application/json:
  *             example:
- *               token: <JWT_TOKEN>
+ *               message: Question created successfully
  *       400:
  *         description: Bad request (validation errors)
- *             
  *       409:
- *         description:  Bad request ( user not exists)
- *         
+ *         description: Conflict (user not exists)
  *       500:
  *         description: Internal server error
  */
-
 
 
 

@@ -36,7 +36,7 @@ auth_router.get(
  * /api/v1/auth/login:
  *   post:
  *     summary: User login
- *     tags: [Register]
+ *     tags: [Login]
  *     requestBody:
  *       required: true
  *       content:

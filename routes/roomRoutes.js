@@ -19,24 +19,9 @@ import roleMiddleware from "../middlewares/roleMiddleware.js";
 /**
  *  @swagger
  * /api/v1/room/:
- *   post:
+ *   get:
  *     summary: Get Room
  *     tags: [Room]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *                 format: email
- *                 description: User's email address
- *               password:
- *                 type: string
- *                 format: password
- *                 description: User's password (at least 6 characters)
  *     responses:
  *       200:
  *         description: Successful login
@@ -68,23 +53,23 @@ roomRouter.get("/", instituteMiddleware, roomController.get_rooms);
  *  @swagger
  * /api/v1/room/:
  *   post:
- *     summary: Enter Room Name
+ *     summary: Create Room 
  *     tags: [Room]
  *     requestBody:
- *       required: true
+ *       required: false
  *       content:
  *         application/json:
  *           schema:
  *             type: object
  *             properties:
- *               email:
+ *               name:
  *                 type: string
- *                 format: email
- *                 description: User's email address
- *               password:
+ *                 format: text
+ *                 description: enter room name
+ *               teachers:
  *                 type: string
- *                 format: password
- *                 description: User's password (at least 6 characters)
+ *                 format: text
+ *                 description: enter teacher name
  *     responses:
  *       200:
  *         description: Successful login
@@ -112,41 +97,50 @@ roomRouter.post(
 );
 
 
-
 /**
  *  @swagger
- * /api/v1/room/:room_id/students:
+ * /api/v1/room/{room_id}/students:
  *   post:
- *     summary: Create Student
+ *     summary: add students
  *     tags: [Institute]
+ *     parameters:
+ *       - in: path
+ *         name: room_id
+ *         schema:
+ *           type: text
+ *         description: ID of the room where subjects are being added
  *     requestBody:
- *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
  *             properties:
- *               email:
- *                 type: string
- *                 format: email
- *                 description: User's email address
- *               password:
- *                 type: string
- *                 format: password
- *                 description: User's password (at least 6 characters)
+ *               subject:
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                     description: Name of the subject
+ *                   teachers:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         user:
+ *                           type: string
+ *                           format: email
+ *                           description: Email of the teacher
  *     responses:
  *       200:
- *         description: Successful login
+ *         description: Successful subject creation
  *         content:
  *           application/json:
  *             example:
- *               token: <JWT_TOKEN>
+ *               message: Subject created successfully
  *       400:
  *         description: Bad request (validation errors)
- *             
  *       409:
- *         description:  Bad request ( user not exists)
- *         
+ *         description: Conflict (user already exists)
  *       500:
  *         description: Internal server error
  */

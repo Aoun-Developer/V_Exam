@@ -24,7 +24,7 @@ import userController from "../controllers/userController.js";
  * /api/v1/users/register_user:
  *   post:
  *     summary: User SignUp
- *     tags: [Login]
+ *     tags: [Register]
  *     requestBody:
  *       required: true
  *       content:
