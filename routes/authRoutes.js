@@ -107,7 +107,7 @@ router.post(
  *  @swagger
  * /api/v1/auth/available-exams/{room_id}:
  *   post:
- *     summary: User login
+ *     summary: available-exams
  *     tags: [Login]
  *     parameters:
  *       - in: path
@@ -163,7 +163,7 @@ router.get(
  *  @swagger
  * /api/v1/auth/start/{room_id}:
  *   post:
- *     summary: User login
+ *     summary: start exam
  *     tags: [Login]
  *     parameters:
  *       - in: path
@@ -213,7 +213,7 @@ router.post(
  *  @swagger
  * /api/v1/auth/submit/{room_id}/{exam_id}:
  *   post:
- *     summary: room exam
+ *     summary: submit exam
  *     tags: [Login]
  *     parameters:
  *       - in: path
