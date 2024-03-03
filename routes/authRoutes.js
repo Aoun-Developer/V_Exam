@@ -15,6 +15,28 @@ import studentMiddleware from "../middlewares/studentMiddleware.js";
  * @access private
  */
 
+
+/**
+ *  @swagger
+ * /api/v1/auth/:
+ *   get:
+ *     summary: get user
+ *     tags: [Login]
+ *     responses:
+ *       200:
+ *         description: Successful login
+ *         content:
+ *           application/json:
+ *             example:
+ *               token: <JWT_TOKEN>
+ *       400:
+ *         description: Bad request (validation errors)
+ *       409:
+ *         description:  Bad request ( user not exists)
+ *       500:
+ *         description: Internal server error
+ */
+
 router.get("/", authMiddleware, authController.get_login);
 
 
@@ -57,22 +79,10 @@ router.get("/", authMiddleware, authController.get_login);
  *               token: <JWT_TOKEN>
  *       400:
  *         description: Bad request (validation errors)
- *         content:
- *           application/json:
- *             example:
- *               errors: [{ msg: 'Please enter your email address.' }, { msg: 'Please insert at least 6 characters.' }]
  *       409:
  *         description:  Bad request ( user not exists)
- *         content:
- *           application/json:
- *             example:
- *               msg: 'User Not exists'
  *       500:
  *         description: Internal server error
- *         content:
- *           application/json:
- *             example:
- *               msg: 'Server error'
  */
 
 
@@ -91,6 +101,50 @@ router.post(
  * @access Private (for students)
  */
 
+
+
+/**
+ *  @swagger
+ * /api/v1/auth/available-exams/{room_id}:
+ *   post:
+ *     summary: User login
+ *     tags: [Login]
+ *     parameters:
+ *       - in: path
+ *         name: room_id
+ *         schema:
+ *           type: text
+ *         description: ID of the room
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: User's email address
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 description: User's password (at least 6 characters)
+ *     responses:
+ *       200:
+ *         description: Successful login
+ *         content:
+ *           application/json:
+ *             example:
+ *               token: <JWT_TOKEN>
+ *       400:
+ *         description: Bad request (validation errors)
+ *       409:
+ *         description:  Bad request ( user not exists)
+ *       500:
+ *         description: Internal server error
+ */
+
 router.get(
   "/available-exams/:room_id",
   [authMiddleware, studentMiddleware],
@@ -102,6 +156,50 @@ router.get(
  * @desc Start an exam
  * @access Private (for students)
  */
+
+
+
+/**
+ *  @swagger
+ * /api/v1/auth/start/{room_id}:
+ *   post:
+ *     summary: User login
+ *     tags: [Login]
+ *     parameters:
+ *       - in: path
+ *         name: room_id
+ *         schema:
+ *           type: text
+ *         description: ID of the room
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: User's email address
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 description: User's password (at least 6 characters)
+ *     responses:
+ *       200:
+ *         description: Successful login
+ *         content:
+ *           application/json:
+ *             example:
+ *               token: <JWT_TOKEN>
+ *       400:
+ *         description: Bad request (validation errors)
+ *       409:
+ *         description:  Bad request ( user not exists)
+ *       500:
+ *         description: Internal server error
+ */
 router.post(
   "/start/:room_id",
   [authMiddleware, studentMiddleware],
@@ -109,6 +207,54 @@ router.post(
   authController.startExam
 );
 
+
+
+/**
+ *  @swagger
+ * /api/v1/auth/submit/{room_id}/{exam_id}:
+ *   post:
+ *     summary: room exam
+ *     tags: [Login]
+ *     parameters:
+ *       - in: path
+ *         name: room_id
+ *         schema:
+ *           type: text
+ *         description: ID of the room
+ *       - in: path
+ *         name: exam_id
+ *         schema:
+ *           type: text
+ *         description: ID of the exam
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: User's email address
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 description: User's password (at least 6 characters)
+ *     responses:
+ *       200:
+ *         description: Successful login
+ *         content:
+ *           application/json:
+ *             example:
+ *               token: <JWT_TOKEN>
+ *       400:
+ *         description: Bad request (validation errors)
+ *       409:
+ *         description:  Bad request ( user not exists)
+ *       500:
+ *         description: Internal server error
+ */
 router.post(
   "/submit/:room_id/:exam_id",
   [
