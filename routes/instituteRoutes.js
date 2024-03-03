@@ -87,7 +87,7 @@ institute_router.post(
  *  @swagger
  * /api/v1/institute/login:
  *   post:
- *     summary: User login
+ *     summary: institute login
  *     tags: [Institute]
  *     requestBody:
  *       required: true
