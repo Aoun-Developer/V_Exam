@@ -21,7 +21,7 @@ import studentMiddleware from "../middlewares/studentMiddleware.js";
  * /api/v1/auth/:
  *   get:
  *     summary: get user
- *     tags: [Login]
+ *     tags: [User]
  *     responses:
  *       200:
  *         description: Successful login
@@ -54,7 +54,7 @@ router.get("/", authMiddleware, authController.get_login);
  * /api/v1/auth/login:
  *   post:
  *     summary: User login
- *     tags: [Login]
+ *     tags: [User]
  *     requestBody:
  *       required: true
  *       content:
@@ -108,7 +108,7 @@ router.post(
  * /api/v1/auth/available-exams/{room_id}:
  *   post:
  *     summary: available-exams
- *     tags: [Login]
+ *     tags: [User]
  *     parameters:
  *       - in: path
  *         name: room_id
@@ -164,7 +164,7 @@ router.get(
  * /api/v1/auth/start/{room_id}:
  *   post:
  *     summary: start exam
- *     tags: [Login]
+ *     tags: [User]
  *     parameters:
  *       - in: path
  *         name: room_id
@@ -214,7 +214,7 @@ router.post(
  * /api/v1/auth/submit/{room_id}/{exam_id}:
  *   post:
  *     summary: submit exam
- *     tags: [Login]
+ *     tags: [User]
  *     parameters:
  *       - in: path
  *         name: room_id
