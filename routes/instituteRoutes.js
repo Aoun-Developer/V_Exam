@@ -18,7 +18,7 @@ import instituteController from "../controllers/instituteController.js";
  *  @swagger
  * /api/v1/institute/register:
  *   post:
- *     summary: User register
+ *     summary: institute register
  *     tags: [Institute]
  *     requestBody:
  *       required: true
